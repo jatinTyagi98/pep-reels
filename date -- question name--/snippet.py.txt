@@ -1,0 +1,55 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
+def reverse(head):
+    prev=None
+    while head != None:
+        temp=head
+        head=head.next
+        temp.next=prev
+        prev=temp
+    return prev
+def isPalindrome_(h1, h2):
+    # write your code here
+
+def Display(head):
+    while head:
+        print(head.data, end=' ')
+        head = head.next
+    print()       
+def length(head):
+    count=0
+    while head is not None:
+        count+=1
+        head=head.next
+    return count 
+
+def addLast(arr):
+    if len(arr)==0:
+        return None
+    head = Node(arr[0])
+    last = head
+    for data in arr[1:]:
+        last.next = Node(data)
+        last = last.next
+    return head
+
+# Main
+n=int(input())
+arr=list(int(i) for i in input().strip().split(' '))
+
+#passing the whole array 
+l = addLast(arr[:n+1])
+r= addLast(arr[:n+1])
+
+r=reverse(r)
+
+ans = isPalindrome_(l,r)
+if ans:
+    print("true")
+else:
+    print("false")
+
