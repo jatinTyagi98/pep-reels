@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -10,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import {Link} from 'react-router-dom'
+import { AuthContext } from '../Context/AuthContext';
 
 import './Login.css'
 
@@ -24,6 +26,8 @@ import img5 from '../Assets/img5.jpg'
 
 
 export default function Login() {
+    const store = useContext(AuthContext)
+    console.log(store)
     const useStyles = makeStyles({
         text : {
             color:'grey',
