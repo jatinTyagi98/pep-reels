@@ -14,6 +14,7 @@ import { AuthContext } from '../Context/AuthContext';
 import './Signup.css'
 import insta from '../Assets/Insta-logo.png'
 import { database } from '../firebase';
+
 import {storage} from '../firebase';
 
 export default function Signup() {
@@ -31,7 +32,7 @@ export default function Signup() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
-    const [file, setFile] = useState()
+    const [file, setFile] = useState(null)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -51,11 +52,12 @@ export default function Signup() {
             let userObj = await signup(email,password)
             let uid = userObj.user.uid
             // console.log(uid)
+            console.log(storage);
             const uploadTask = storage.ref(`/users/${uid}/ProfileImage`).put(file);
             uploadTask.on('state_changed',fn1,fn2,fn3);
 
             function fn1(snapshot){
-                let progress = (snapshot.bytesTranferred / snapshot.totalBytes)*100
+                let progress = (snapshot.bytesTransferred / snapshot.totalBytes)*100
                 console.log(`Upload is ${progress} done`); 
             }
             function fn2(error){
@@ -66,34 +68,34 @@ export default function Signup() {
                 setLoading(false)
                 return;
             }
-            function fn3(){
-                uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+             function fn3(){
+               uploadTask.snapshot.ref.getDownloadURL().then((url) => {
                     console.log(url);
                     database.users.doc(uid).set({
                         email:email,
-                        fullname: name,
                         userId:uid,
+                        fullname: name,
                         profileUrl: url,
-                        createdAt: database.getTimeStamp()
-
+                        
                     })
                 })
-                console.log(database.users.doc(uid))
+                    // createdAt: database.getTimeStamp()
+                
+                // console.log(database.users.doc(uid))
                 setLoading(false)
             history.push('/')
             }
             
         }
         catch(err){
-            if(file==null){
-                setError('Upload the file')
+                if(file == null){
+                setError('Upload the file');
                 setTimeout(() => {
                     setError('')
                 },2000)
               }
             }
-           
-        
+            
     }
 
   return (

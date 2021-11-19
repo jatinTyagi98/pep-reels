@@ -12,6 +12,8 @@ import TextField from '@mui/material/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import {Link} from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext';
+import { useState } from 'react';
+import { useHistory } from 'react-router';
 
 import './Login.css'
 
@@ -22,6 +24,7 @@ import img2 from '../Assets/img2.jpg'
 import img3 from '../Assets/img3.jpg'
 import img4 from '../Assets/img4.jpg'
 import img5 from '../Assets/img5.jpg'
+import { SettingsEthernet } from '@material-ui/icons';
 
 
 
@@ -42,6 +45,30 @@ export default function Login() {
         }
     })
     const classes = useStyles();
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const [error,setError] = useState('')
+    const [loading,setLoading] = useState(false)
+    const history = useHistory()
+    const {login} = useContext(AuthContext);
+
+    const handleClick = async() =>{
+        try{
+            setError('');
+            setLoading(true);
+            let res = await login(email,password);
+            setLoading(false);
+            history.push('/')
+        }catch(error){
+            setError(error);
+            setTimeout(() => {
+                setError('')
+            },2000)
+
+            setLoading(false)
+
+        }
+    }
   return (
       <div className="loginWrapper">
           <div className="imgCar" style={{backgroundImage:'url('+bg+')',backgroundSize:'cover'}} >
@@ -79,9 +106,11 @@ export default function Login() {
                   {/* <CardActionArea> */}
                     <CardContent>
                    
-                    <Alert severity="error">This is an error alert — check it out!</Alert>
-                    <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin='dense' size='small'/>
-                    <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small'/>
+                    {error != '' && <Alert severity="error">{error}</Alert>}
+
+
+                    <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin='dense' size='small' value={email} onChange = {(e) => setEmail(e.target.value)}/>
+                    <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin='dense' size='small' value={password}  onChange= {(e) => setPassword(e.target.value)}/>
                     <Typography color='primary' className={classes.text1} variant="subtitle1" >
                         Forgot Password ?
                     </Typography>
@@ -90,7 +119,7 @@ export default function Login() {
                     </CardContent>
                 {/* </CardActionArea> */}
                 <CardActions>
-                    <Button  color="primary" fullWidth={true} variant="contained">
+                    <Button  color="primary" fullWidth={true} variant="contained" onClick={handleClick} disabled={loading}>
                         Log in  
                     </Button>
                 </CardActions>

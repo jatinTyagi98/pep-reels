@@ -1,4 +1,4 @@
-import React,{useState,useEffect, Children} from 'react'
+import React,{useState,useEffect} from 'react'
 import {auth} from '../firebase'
 export const AuthContext = React.createContext()
 
@@ -21,9 +21,9 @@ export function AuthProvider({children}){
     }
 
     useEffect(() => {
-        const unsub =  auth.onAuthStateChanged((user) => {
-            setuser(user)
-            setloading(false)
+        const unsub =  auth.onAuthStateChanged(user => {
+            setuser(user);
+            setloading(false);
         })
         return () => {
            unsub()
