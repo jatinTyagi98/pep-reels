@@ -1,0 +1,47 @@
+.loginWrapper{
+    display: flex;
+    justify-content: center;
+
+}
+
+.loginCard{
+    width: 27vw;
+    margin-top: 10%;
+}
+
+.cardLogo{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardLogo img{
+    width:15vw;
+}
+
+@media only screen and (max-width:620px){
+    .loginCard{
+        width: 60%
+    }
+    .cardLogo img{
+        width: 35%;
+    }
+
+}
+
+.imgCar{
+    margin: 8vh;
+    height:590px;
+    width:441px;
+    position:relative;
+}
+
+.car {
+    height: 423px;
+    width: 241px;
+    position: absolute;
+    left: 143px;
+    top: 93px;
+
+}

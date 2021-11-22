@@ -1,0 +1,31 @@
+.signupWrapper{
+    display: flex;
+    justify-content: center;
+
+}
+
+.signupCard{
+    width: 27vw;
+    margin-top: 5%;
+}
+
+.cardLogo{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardLogo img{
+    width:15vw;
+}
+
+@media only screen and (max-width:620px){
+    .signupCard{
+        width: 60%
+    }
+    .cardLogo img{
+        width: 35%;
+    }
+
+}
