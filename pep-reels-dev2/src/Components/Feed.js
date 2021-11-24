@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext'
 import { database } from '../firebase'
 import UploadFiles from './UploadFiles'
 import Post from './Post'
+import Navbar from './Navbar'
 
 function Feed() {
     const {user,logout} = useContext(AuthContext)
@@ -25,16 +26,20 @@ function Feed() {
     // console.log('nxt',UserData);
 
     return (
+        <>
+        <Navbar userData = {userData}/>
         <div style={{display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>   
-            <div className="comp" style={{width:'50%'}}>
+            {/* <div className="comp" style={{width:'50%'}}>
                 <h1> hello feed </h1>
                 <button onClick={logout}>Logout</button>
 
-            </div>
+            </div> */}
+            
             <UploadFiles user = {userData}/>
             <Post userData = {userData}/>
             
         </div>
+        </>
     )
 }
 

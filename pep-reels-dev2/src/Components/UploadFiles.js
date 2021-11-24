@@ -64,7 +64,7 @@ function UploadFiles(props) {
 
                     database.posts.add(obj).then(async (ref) =>{
                         let res = database.users.doc(props.user.userId).update({
-                            postIds:props.user.postIds != null ? [...props.user.posIds,ref.id] : [ref.id]
+                            postIds:props.user.postIds != null ? [...props.user.postIds,ref.id] : [ref.id]
                         })
                     }).then(() =>{
                         setLoading(false)
@@ -82,7 +82,7 @@ function UploadFiles(props) {
 
         }
     return (
-        <div>
+        <div style={{marginTop:'5rem',marginBottom:'1rem'}}>
             {
             error != ''? <Alert severity="error">{error}</Alert>:
             <>

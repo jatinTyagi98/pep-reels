@@ -23,7 +23,7 @@ function AddComment({userData, postData}) {
     return (
         <div style={{width:'100%'}}>
             <TextField id="outlined-basic" label="comment" variant="outlined" size= "small" sx ={{width:'70%'}} value={text} onChange={(e) => setText(e.target.value)}/>
-            <Button variant="contained" onClick={handleClick}>Contained</Button>
+            <Button variant="contained" onClick={handleClick}>comment</Button>
 
             
         </div>
